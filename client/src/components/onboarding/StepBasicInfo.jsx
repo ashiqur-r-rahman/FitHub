@@ -15,6 +15,14 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
     onChangeData({ unitSystem: mode });
   };
 
+  const handleNameChange = (val) => {
+    onChangeData({
+      name: val,
+      firstName: val.split(' ')[0] || val,
+      lastName: val.split(' ').slice(1).join(' ') || '',
+    });
+  };
+
   const handleHeightCm = (cmVal) => {
     const cm = Number(cmVal);
     onChangeData({ height: cm });
@@ -46,35 +54,25 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
   return (
     <div className="onboarding-step-content">
       <div className="step-header">
-        <h2>Let's get to know you</h2>
-        <p className="muted">Enter your basic info to calculate your daily BMI, BMR, and energy targets.</p>
+        <h2>Basic Information</h2>
+        <p className="muted">Enter your basic details to compute your health metrics.</p>
       </div>
 
       <div className="onboarding-form">
-        <div className="field-row">
-          <label className="field">
-            <span>First Name *</span>
-            <input
-              type="text"
-              className="input"
-              placeholder="e.g. Alex"
-              value={onboardingData.firstName || ''}
-              onChange={(e) => onChangeData({ firstName: e.target.value })}
-              required
-            />
-          </label>
-          <label className="field">
-            <span>Last Name</span>
-            <input
-              type="text"
-              className="input"
-              placeholder="e.g. Morgan"
-              value={onboardingData.lastName || ''}
-              onChange={(e) => onChangeData({ lastName: e.target.value })}
-            />
-          </label>
-        </div>
+        {/* Name Field */}
+        <label className="field full-width">
+          <span>Name *</span>
+          <input
+            type="text"
+            className="input"
+            placeholder="Enter your full name"
+            value={onboardingData.name || onboardingData.firstName || ''}
+            onChange={(e) => handleNameChange(e.target.value)}
+            required
+          />
+        </label>
 
+        {/* Age & Gender Selection */}
         <div className="field-row">
           <label className="field">
             <span>Age *</span>
@@ -83,28 +81,37 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
               className="input"
               min="5"
               max="120"
-              placeholder="25"
+              placeholder="e.g. 25"
               value={onboardingData.age || ''}
               onChange={(e) => onChangeData({ age: Number(e.target.value) })}
+              required
             />
           </label>
           <label className="field">
-            <span>Gender (for BMR)</span>
-            <select
-              className="input"
-              value={onboardingData.gender || 'Female'}
-              onChange={(e) => onChangeData({ gender: e.target.value })}
-            >
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-              <option value="Neutral">Neutral / Other</option>
-            </select>
+            <span>Gender *</span>
+            <div className="gender-toggle-pills">
+              <button
+                type="button"
+                className={`gender-pill ${onboardingData.gender === 'Female' ? 'active' : ''}`}
+                onClick={() => onChangeData({ gender: 'Female' })}
+              >
+                Female
+              </button>
+              <button
+                type="button"
+                className={`gender-pill ${onboardingData.gender === 'Male' ? 'active' : ''}`}
+                onClick={() => onChangeData({ gender: 'Male' })}
+              >
+                Male
+              </button>
+            </div>
           </label>
         </div>
 
+        {/* Unit Toggle & Height/Weight */}
         <div className="field-stack">
           <div className="field-header-row">
-            <span>Height & Weight Units</span>
+            <span>Units</span>
             <div className="unit-toggle-pills">
               <button
                 type="button"
@@ -152,7 +159,7 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
           ) : (
             <div className="field-row">
               <label className="field">
-                <span>Height (Feet / Inches) *</span>
+                <span>Height (Ft / In) *</span>
                 <div className="dual-input">
                   <input
                     type="number"

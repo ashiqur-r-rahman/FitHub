@@ -7,7 +7,7 @@ import StepCommitment from './StepCommitment';
 export default function OnboardingFlow({ onboardingData, onChangeData, onToggleInterest, onCompleteOnboarding, isModal = false, onCloseModal }) {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const canProceedStep1 = Boolean(onboardingData.firstName?.trim() && onboardingData.age > 0 && onboardingData.height > 0 && onboardingData.weight > 0);
+  const canProceedStep1 = Boolean((onboardingData.name?.trim() || onboardingData.firstName?.trim()) && onboardingData.age > 0 && onboardingData.height > 0 && onboardingData.weight > 0);
   const canProceedStep2 = Array.isArray(onboardingData.interests) && onboardingData.interests.length > 0;
 
   const handleNext = () => {

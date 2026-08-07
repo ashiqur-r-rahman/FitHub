@@ -333,35 +333,98 @@ body {
   font-weight: 600;
 }
 
-/* BMI Gauge Styles */
-.gauge-container {
-  width: 100%;
-  max-width: 170px;
-  margin: 0 auto;
+/* Gender Toggle Pills */
+.gender-toggle-pills {
+  display: flex;
+  gap: 6px;
+  background-color: var(--color-bg-page);
+  padding: 3px;
+  border-radius: var(--radius-button);
+  border: 1px solid var(--color-secondary-2);
 }
 
-.gauge-svg {
-  width: 100%;
+.gender-pill {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.gauge-value {
-  font-size: 18px;
-  font-weight: 800;
+.gender-pill.active {
+  background-color: var(--color-primary-accent);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(11, 31, 58, 0.15);
+}
+
+/* Premium BMI Gauge Clock Styles */
+.premium-gauge {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-gauge-wrapper {
+  width: 100%;
+  max-width: 220px;
+  margin: 10px auto 0 auto;
+}
+
+.premium-gauge-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.gauge-digital-val {
+  font-size: 26px;
+  font-weight: 900;
   fill: var(--color-primary-accent);
+  font-family: var(--font-family);
+  letter-spacing: -0.03em;
 }
 
-.gauge-sub {
-  font-size: 8px;
+.gauge-unit-text {
+  font-size: 10px;
+  font-weight: 600;
   fill: #64748b;
+  text-transform: uppercase;
 }
 
-.gauge-legend {
+.gauge-scale-legend {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
-  color: #64748b;
-  margin-top: 8px;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #edf2f7;
+  flex-wrap: wrap;
 }
+
+.scale-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.scale-item .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.underweight-dot { background-color: #7FA8D9; }
+.normal-dot { background-color: #3E8E7E; }
+.overweight-dot { background-color: #C98A3C; }
+.obese-dot { background-color: #B3454A; }
 
 /* Weight Trend Chart */
 .subtext {
