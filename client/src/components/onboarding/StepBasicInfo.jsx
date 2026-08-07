@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { cmToFtIn, ftInToCm, kgToLbs, lbsToKg } from '../../utils/healthCalculations';
 
-export default function StepBasicInfo({ onboardingData, onChangeData }) {
+export default function StepBasicInfo({ onboardingData, onChangeData, onCompleteOnboarding }) {
   const [unitSystem, setUnitSystem] = useState(onboardingData.unitSystem || 'metric');
 
   // Imperial helper local state
@@ -51,11 +52,18 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
     onChangeData({ weight: kg });
   };
 
+  const isValid = Boolean(
+    (onboardingData.name?.trim() || onboardingData.firstName?.trim()) &&
+    onboardingData.age > 0 &&
+    onboardingData.height > 0 &&
+    onboardingData.weight > 0
+  );
+
   return (
     <div className="onboarding-step-content">
       <div className="step-header">
-        <h2>Basic Information</h2>
-        <p className="muted">Enter your basic details to compute your health metrics.</p>
+        <h2>Welcome to FitHub</h2>
+        <p className="muted">Enter your basic details to instantly calculate your health metrics and start your dashboard.</p>
       </div>
 
       <div className="onboarding-form">
@@ -65,7 +73,7 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
           <input
             type="text"
             className="input"
-            placeholder="Enter your full name"
+            placeholder="Enter your name"
             value={onboardingData.name || onboardingData.firstName || ''}
             onChange={(e) => handleNameChange(e.target.value)}
             required
@@ -195,6 +203,20 @@ export default function StepBasicInfo({ onboardingData, onChangeData }) {
             </div>
           )}
         </div>
+
+        {/* Start Button */}
+        {onCompleteOnboarding && (
+          <div className="start-btn-row">
+            <button
+              type="button"
+              className="cta-primary-btn start-dashboard-btn"
+              disabled={!isValid}
+              onClick={onCompleteOnboarding}
+            >
+              Start FitHub Dashboard <ArrowRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

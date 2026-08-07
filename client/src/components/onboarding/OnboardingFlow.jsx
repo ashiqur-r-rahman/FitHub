@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import StepBasicInfo from './StepBasicInfo';
 import StepInterests from './StepInterests';
 import StepCommitment from './StepCommitment';
@@ -7,7 +7,12 @@ import StepCommitment from './StepCommitment';
 export default function OnboardingFlow({ onboardingData, onChangeData, onToggleInterest, onCompleteOnboarding, isModal = false, onCloseModal }) {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const canProceedStep1 = Boolean((onboardingData.name?.trim() || onboardingData.firstName?.trim()) && onboardingData.age > 0 && onboardingData.height > 0 && onboardingData.weight > 0);
+  const canProceedStep1 = Boolean(
+    (onboardingData.name?.trim() || onboardingData.firstName?.trim()) &&
+    onboardingData.age > 0 &&
+    onboardingData.height > 0 &&
+    onboardingData.weight > 0
+  );
   const canProceedStep2 = Array.isArray(onboardingData.interests) && onboardingData.interests.length > 0;
 
   const handleNext = () => {
@@ -27,9 +32,9 @@ export default function OnboardingFlow({ onboardingData, onChangeData, onToggleI
   return (
     <div className={`onboarding-container ${isModal ? 'modal-mode' : 'fullscreen-mode'}`}>
       <div className="onboarding-card">
-        {/* Header Progress Bar */}
+        {/* Header */}
         <div className="onboarding-progress-header">
-          <div className="brand-badge">FitHub Onboarding</div>
+          <div className="brand-badge">FitHub Setup</div>
           <div className="step-dots">
             <div className={`dot ${currentStep >= 1 ? 'active' : ''}`}>1</div>
             <div className="line" />
@@ -45,7 +50,11 @@ export default function OnboardingFlow({ onboardingData, onChangeData, onToggleI
         {/* Step Body */}
         <div className="step-body-container">
           {currentStep === 1 && (
-            <StepBasicInfo onboardingData={onboardingData} onChangeData={onChangeData} />
+            <StepBasicInfo
+              onboardingData={onboardingData}
+              onChangeData={onChangeData}
+              onCompleteOnboarding={onCompleteOnboarding}
+            />
           )}
           {currentStep === 2 && (
             <StepInterests selectedInterests={onboardingData.interests || []} onToggleInterest={onToggleInterest} />
@@ -55,7 +64,7 @@ export default function OnboardingFlow({ onboardingData, onChangeData, onToggleI
           )}
         </div>
 
-        {/* Footer Navigation */}
+        {/* Footer Optional Step Navigation */}
         <div className="onboarding-footer">
           {currentStep > 1 ? (
             <button type="button" className="secondary-btn icon-left" onClick={handleBack}>
@@ -65,11 +74,11 @@ export default function OnboardingFlow({ onboardingData, onChangeData, onToggleI
             <div />
           )}
 
-          {currentStep < 3 && (
+          {currentStep < 3 && currentStep > 1 && (
             <button
               type="button"
               className="primary-btn icon-right"
-              disabled={(currentStep === 1 && !canProceedStep1) || (currentStep === 2 && !canProceedStep2)}
+              disabled={currentStep === 2 && !canProceedStep2}
               onClick={handleNext}
             >
               Next Step <ArrowRight size={16} />
