@@ -1,4 +1,4 @@
-# FitHub — Personal Fitness Tracker (Branch: rofaz)
+# FitHub — Personal Fitness & Wellness Dashboard (Branch: rofaz)
 
 FitHub is a local-first, zero-login personal fitness tracking web application built with React, Vite, and LocalStorage cache.
 
