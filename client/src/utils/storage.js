@@ -2,7 +2,7 @@
 
 import { DEFAULT_APP_STATE } from './initialData';
 
-const STORAGE_KEY = 'fithub-app-state-v2';
+const STORAGE_KEY = 'fithub-app-state-v3';
 
 const getStorage = () => (typeof window !== 'undefined' ? window.localStorage : null);
 
