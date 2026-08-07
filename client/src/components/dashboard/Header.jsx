@@ -1,29 +1,46 @@
-import { Bell, Search } from 'lucide-react';
+import { User, RefreshCw } from 'lucide-react';
 
-export default function Header({ activeView, profile, statusMessage }) {
-  const labels = {
-    overview: 'Dashboard',
-    exercise: 'Exercise',
-    nutrition: 'Nutrition',
-    recovery: 'Recovery',
-    tasks: 'Tasks',
-    profile: 'Profile',
-    settings: 'Settings',
-    privacy: 'Privacy',
+export default function Header({ profile, onSelectView, onRetakeOnboarding }) {
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good Morning';
+    if (hour < 18) return 'Good Afternoon';
+    return 'Good Evening';
   };
 
+  const formattedDate = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  const firstName = profile?.firstName || profile?.name?.split(' ')[0] || 'Friend';
+
   return (
-    <header className="topbar">
-      <div>
-        <h2>{labels[activeView]}</h2>
-        <p>Welcome back, {profile?.name?.split(' ')[0] || 'Maya'}. {statusMessage}</p>
+    <header className="topbar-container">
+      <div className="greeting-block">
+        <h2>{getGreeting()}, {firstName} 👋</h2>
+        <p className="date-subtext">{formattedDate}</p>
       </div>
-      <div className="topbar-actions">
-        <button type="button" className="icon-btn" aria-label="Search">
-          <Search size={18} />
+
+      <div className="topbar-right-actions">
+        <button
+          type="button"
+          className="retake-onboarding-btn"
+          title="Retake Onboarding Flow"
+          onClick={onRetakeOnboarding}
+        >
+          <RefreshCw size={14} /> Onboarding
         </button>
-        <button type="button" className="icon-btn" aria-label="Notifications">
-          <Bell size={18} />
+
+        <button
+          type="button"
+          className="profile-avatar-btn"
+          title="View Profile"
+          onClick={() => onSelectView('profile')}
+        >
+          <span className="avatar-initials">{firstName.charAt(0)}</span>
         </button>
       </div>
     </header>

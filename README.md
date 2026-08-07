@@ -1,16 +1,18 @@
-# React + Vite
+# FitHub — Personal Fitness & Wellness Tracker (Branch: rofaz)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+FitHub is a local-first, zero-login personal fitness tracking web application built with React, Vite, and LocalStorage cache.
 
-Currently, two official plugins are available:
+## Features on `rofaz` Branch
+- **Calculated Metrics**: BMI, BMR, TDEE, Ideal Weight Range, and Water Intake targets.
+- **3-Step Carousel Onboarding**: Basic Info, Interests Selection, and Self-Commitment Agreement.
+- **Graphical Overview**: BMI gauge needle, Weight Trend chart, and stat cards.
+- **Tracking Tabs**: Exercise, Food, and Sleep tabs with Record, Tracking, and Recommendation sub-panels.
+- **Task Manager**: 3-state Kanban workflow (To Do, In Progress, Done).
+- **Settings & Privacy**: Unit toggle (Metric ⇄ Imperial), reset app data modal, and local privacy declaration.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Development & Build
+```bash
+npm --prefix client install
+npm --prefix client run dev
+npm --prefix client run build
+```
