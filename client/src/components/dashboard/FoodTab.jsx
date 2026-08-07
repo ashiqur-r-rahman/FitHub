@@ -1,4 +1,4 @@
-export default function FoodTab() {
+export default function FoodTab({ meals, onToggleMeal }) {
   return (
     <section className="section-card">
       <div className="section-heading">
@@ -6,20 +6,20 @@ export default function FoodTab() {
         <span className="badge">Balanced</span>
       </div>
       <div className="list-stack">
-        <div className="list-item">
-          <div>
-            <strong>Breakfast</strong>
-            <div className="muted">Greek yogurt, berries, nuts</div>
+        {meals?.map((meal) => (
+          <div className="list-item" key={meal.id}>
+            <div>
+              <strong>{meal.title}</strong>
+              <div className="muted">{meal.details}</div>
+            </div>
+            <div className="list-actions">
+              <span className="badge">{meal.tag}</span>
+              <button type="button" className={`secondary-btn ${meal.done ? 'done' : ''}`} onClick={() => onToggleMeal(meal.id)}>
+                {meal.done ? 'Logged' : 'Log'}
+              </button>
+            </div>
           </div>
-          <span className="badge">Protein</span>
-        </div>
-        <div className="list-item">
-          <div>
-            <strong>Lunch</strong>
-            <div className="muted">Salmon bowl with greens</div>
-          </div>
-          <span className="badge">Fiber</span>
-        </div>
+        ))}
       </div>
     </section>
   );

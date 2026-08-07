@@ -1,6 +1,6 @@
 import { Bell, Search } from 'lucide-react';
 
-export default function Header({ activeView }) {
+export default function Header({ activeView, profile, statusMessage }) {
   const labels = {
     overview: 'Dashboard',
     exercise: 'Exercise',
@@ -16,7 +16,7 @@ export default function Header({ activeView }) {
     <header className="topbar">
       <div>
         <h2>{labels[activeView]}</h2>
-        <p>Welcome back, Maya. You are on track.</p>
+        <p>Welcome back, {profile?.name?.split(' ')[0] || 'Maya'}. {statusMessage}</p>
       </div>
       <div className="topbar-actions">
         <button type="button" className="icon-btn" aria-label="Search">

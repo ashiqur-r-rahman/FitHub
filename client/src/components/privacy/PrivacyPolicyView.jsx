@@ -9,6 +9,7 @@ export default function PrivacyPolicyView() {
         <p>Your health data is stored securely and never shared without consent.</p>
         <p>You can review, export, or delete your activity history at any time.</p>
         <p>Reminder settings and wellness preferences stay under your control.</p>
+        <p>Data is currently saved locally and is ready to be synced to a backend when you are ready.</p>
       </div>
     </section>
   );
