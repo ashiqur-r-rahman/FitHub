@@ -8,7 +8,7 @@
 
 ## 1. Overview of Accomplishments & Implemented Features
 
-This document provides complete documentation of the frontend client features, health metric formulas, UI/UX components, and incremental git commits added on branch `rofaz` in accordance with `FitHub-PDE.md` and `FitHub-UI-Spec.md`.
+This document provides complete documentation of the frontend client features, health metric formulas, UI/UX components, incremental git commits, and merge conflict resolution added on branch `rofaz` in accordance with `FitHub-PDE.md` and `FitHub-UI-Spec.md`.
 
 ---
 
@@ -50,24 +50,28 @@ This document provides complete documentation of the frontend client features, h
 
 ### 2.6 Profile, Settings, and Privacy Views (`src/components/profile/`, `settings/`, `privacy/`)
 - **ProfileView:** Inline profile editing, weight trend logging trigger, and live metric recalculation toast.
-- **SettingsView:** Metric ⇄ Imperial unit preference toggle, reminder toggles (Sleep, Workout, Water), and **Reset App Data Confirmation Modal**.
+- **SettingsView:** Metric ⇄ Imperial unit preference toggle, reminder switches, and **Reset App Data Confirmation Modal**.
 - **PrivacyPolicyView:** Formal declaration of 100% local-first data storage (LocalStorage/Cache) with zero cloud tracking.
 
 ---
 
-## 3. Commit History Log (Branch `rofaz`)
+## 3. Merge Conflict Demonstration & Resolution
 
-Below is the chronological log of git commits created during this collaboration sprint:
+A git merge conflict was created on branch `rofaz` by introducing competing edits to `README.md` and resolved cleanly:
 
 ```text
-* c1fc669 feat(ui): assemble complete dashboard layout, topbar header, navigation sidebar, and design system CSS
-* fb87f1d feat(views): complete Profile editing with metrics recalculation, Settings with unit toggle & reset modal, and Privacy Policy page
-* a6c144b feat(taskmanager): add 3-state Kanban workflow (To Do, In Progress, Done) with status cycling and filtering
-* 4244e6f feat(tracking): implement 3-part tracking sub-panels (Record, Tracking, Recommendation) across Exercise, Food, and Sleep tabs
-* 1cad74b feat(overview): add BMI gauge, BMR, TDEE, Ideal Weight Range, Water intake, and Weight Trend chart
-* 74bd8b3 feat(onboarding): implement 3-step carousel onboarding flow with local-first auto-save
-* 196f0e4 feat(core): implement health metrics formulas, unit conversions, and data models
+*   fd2d9a0 fix(merge): resolve merge conflict in README.md on rofaz branch
+|\  
+| * 4f03e8b feat(readme): update header on rofaz-feature-conflict branch
+* | 7b0192e feat(readme): update title format on rofaz branch
+|/  
+* aeb1ae1 docs: update README with FitHub project details on rofaz branch
 ```
+
+### Resolution Process:
+1. Git conflict detected in `README.md` (`<<<<<<< HEAD` vs `>>>>>>> rofaz-feature-conflict`).
+2. Edited `README.md` to remove conflict markers and harmonize headers into `# FitHub — Personal Fitness & Wellness Tracker (Branch: rofaz)`.
+3. Committed resolution (`fd2d9a0`) and pushed directly to `origin/rofaz`.
 
 ---
 
