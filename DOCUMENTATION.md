@@ -11,7 +11,7 @@
 
 ## 1. Executive Summary
 
-This document serves as the collaboration handover for work completed on branch **`rofaz`**. Based on the project specifications (`FitHub-PDE.md` and `FitHub-UI-Spec.md`), the entire frontend client application has been built, tested, documented, and pushed to GitHub across structured git commits with full local-first data caching and zero-backend dependency.
+This document serves as the collaboration handover for work completed on branch **`rofaz`**. Based on the project specifications, the entire frontend client application has been built, tested, documented, and pushed to GitHub across structured git commits with full local-first data caching and zero-backend dependency.
 
 ---
 
