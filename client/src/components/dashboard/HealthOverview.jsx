@@ -1,4 +1,4 @@
-import { Flame, FlameKind, Droplets, Scale, Target, Activity } from 'lucide-react';
+import { Flame, Droplets, Scale, Target, Activity } from 'lucide-react';
 import BmiGauge from './BmiGauge';
 import WeightTrendChart from './WeightTrendChart';
 import {
