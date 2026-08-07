@@ -1,25 +1,22 @@
-export default function ExerciseTab() {
+export default function ExerciseTab({ workouts, onToggleWorkout }) {
   return (
     <section className="section-card">
       <div className="section-heading">
         <h3>Exercise plan</h3>
-        <span className="badge">3 sessions</span>
+        <span className="badge">{workouts?.length || 0} sessions</span>
       </div>
       <div className="list-stack">
-        <div className="list-item">
-          <div>
-            <strong>Upper body strength</strong>
-            <div className="muted">45 min • 3 rounds</div>
+        {workouts?.map((workout) => (
+          <div className="list-item" key={workout.id}>
+            <div>
+              <strong>{workout.title}</strong>
+              <div className="muted">{workout.details}</div>
+            </div>
+            <button type="button" className={`secondary-btn ${workout.done ? 'done' : ''}`} onClick={() => onToggleWorkout(workout.id)}>
+              {workout.done ? 'Done' : 'Mark done'}
+            </button>
           </div>
-          <span className="badge">Today</span>
-        </div>
-        <div className="list-item">
-          <div>
-            <strong>Mobility flow</strong>
-            <div className="muted">20 min • recovery focus</div>
-          </div>
-          <span className="badge">Tomorrow</span>
-        </div>
+        ))}
       </div>
       <div className="tip-box">
         Stronger habits come from keeping the routine small and repeatable.

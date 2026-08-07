@@ -2,7 +2,7 @@ import StepBasicInfo from './StepBasicInfo';
 import StepInterests from './StepInterests';
 import StepCommitment from './StepCommitment';
 
-export default function OnboardingFlow() {
+export default function OnboardingFlow({ profile, onboarding, onUpdateProfile, onToggleInterest }) {
   return (
     <section className="section-card full">
       <div className="section-heading">
@@ -10,9 +10,9 @@ export default function OnboardingFlow() {
         <span className="muted">Personalize your experience</span>
       </div>
       <div className="card-grid">
-        <StepBasicInfo />
-        <StepInterests />
-        <StepCommitment />
+        <StepBasicInfo profile={profile} onUpdateProfile={onUpdateProfile} />
+        <StepInterests selectedInterests={profile?.interests || onboarding?.interests || []} onToggleInterest={onToggleInterest} />
+        <StepCommitment profile={profile} onUpdateProfile={onUpdateProfile} />
       </div>
     </section>
   );
