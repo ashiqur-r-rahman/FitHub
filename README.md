@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="client/public/logo.png" alt="FitHub Logo" width="480" />
+
 # FitHub
 
 **A local-first personal fitness & wellness tracker — no account, no cloud, no compromise.**
