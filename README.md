@@ -1,8 +1,7 @@
-# FitHub — Personal Fitness & Wellness Tracker (Branch: rofaz)
-
+# FitHub — Personal Fitness & Wellness Tracker
 FitHub is a local-first, zero-login personal fitness tracking web application built with React, Vite, and LocalStorage cache.
 
-## Features on `rofaz` Branch
+## Features on Rofaz Branch
 - **Calculated Metrics**: BMI, BMR, TDEE, Ideal Weight Range, and Water Intake targets.
 - **3-Step Carousel Onboarding**: Basic Info, Interests Selection, and Self-Commitment Agreement.
 - **Graphical Overview**: BMI gauge needle, Weight Trend chart, and stat cards.
