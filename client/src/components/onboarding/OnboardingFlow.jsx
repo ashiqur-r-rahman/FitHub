@@ -1,19 +1,24 @@
 import StepBasicInfo from './StepBasicInfo';
-import StepInterests from './StepInterests';
-import StepCommitment from './StepCommitment';
 
-export default function OnboardingFlow({ profile, onboarding, onUpdateProfile, onToggleInterest }) {
+export default function OnboardingFlow({ onboardingData, onChangeData, onCompleteOnboarding, isModal = false, onCloseModal }) {
   return (
-    <section className="section-card full">
-      <div className="section-heading">
-        <h3>Onboarding checklist</h3>
-        <span className="muted">Personalize your experience</span>
+    <div className={`onboarding-container ${isModal ? 'modal-mode' : 'fullscreen-mode'}`}>
+      <div className="onboarding-card">
+        <div className="onboarding-progress-header">
+          <div className="brand-badge">⚡ FitHub Quick Setup</div>
+          {isModal && onCloseModal && (
+            <button type="button" className="close-btn" onClick={onCloseModal}>✕</button>
+          )}
+        </div>
+
+        <div className="step-body-container">
+          <StepBasicInfo
+            onboardingData={onboardingData}
+            onChangeData={onChangeData}
+            onCompleteOnboarding={onCompleteOnboarding}
+          />
+        </div>
       </div>
-      <div className="card-grid">
-        <StepBasicInfo profile={profile} onUpdateProfile={onUpdateProfile} />
-        <StepInterests selectedInterests={profile?.interests || onboarding?.interests || []} onToggleInterest={onToggleInterest} />
-        <StepCommitment profile={profile} onUpdateProfile={onUpdateProfile} />
-      </div>
-    </section>
+    </div>
   );
 }
