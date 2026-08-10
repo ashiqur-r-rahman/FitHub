@@ -4,6 +4,12 @@ import { cmToFtIn, ftInToCm, kgToLbs, lbsToKg } from '../../utils/healthCalculat
 
 export default function StepBasicInfo({ onboardingData, onChangeData, onCompleteOnboarding }) {
   const [unitSystem, setUnitSystem] = useState(onboardingData.unitSystem || 'metric');
+  const [hintDismissed, setHintDismissed] = useState({
+    name: false,
+    age: false,
+    feet: false,
+    inches: false,
+  });
 
   // Imperial helper local state
   const ftIn = cmToFtIn(onboardingData.height || 170);
@@ -52,6 +58,10 @@ export default function StepBasicInfo({ onboardingData, onChangeData, onComplete
     onChangeData({ weight: kg });
   };
 
+  const dismissHint = (field) => {
+    setHintDismissed((prev) => (prev[field] ? prev : { ...prev, [field]: true }));
+  };
+
   const isValid = Boolean(
     (onboardingData.name?.trim() || onboardingData.firstName?.trim()) &&
     onboardingData.age > 0 &&
@@ -73,8 +83,9 @@ export default function StepBasicInfo({ onboardingData, onChangeData, onComplete
           <input
             type="text"
             className="input"
-            placeholder="Enter your name"
+            placeholder={hintDismissed.name ? '' : 'Enter your name'}
             value={onboardingData.name || onboardingData.firstName || ''}
+            onFocus={() => dismissHint('name')}
             onChange={(e) => handleNameChange(e.target.value)}
             required
           />
@@ -89,8 +100,9 @@ export default function StepBasicInfo({ onboardingData, onChangeData, onComplete
               className="input"
               min="5"
               max="120"
-              placeholder="e.g. 25"
+              placeholder={hintDismissed.age ? '' : 'e.g. 25'}
               value={onboardingData.age || ''}
+              onFocus={() => dismissHint('age')}
               onChange={(e) => onChangeData({ age: Number(e.target.value) })}
               required
             />
@@ -174,8 +186,9 @@ export default function StepBasicInfo({ onboardingData, onChangeData, onComplete
                     className="input"
                     min="1"
                     max="8"
-                    placeholder="Ft"
+                    placeholder={hintDismissed.feet ? '' : 'Ft'}
                     value={feet}
+                    onFocus={() => dismissHint('feet')}
                     onChange={(e) => handleFtInChange(Number(e.target.value), inches)}
                   />
                   <input
@@ -183,8 +196,9 @@ export default function StepBasicInfo({ onboardingData, onChangeData, onComplete
                     className="input"
                     min="0"
                     max="11"
-                    placeholder="In"
+                    placeholder={hintDismissed.inches ? '' : 'In'}
                     value={inches}
+                    onFocus={() => dismissHint('inches')}
                     onChange={(e) => handleFtInChange(feet, Number(e.target.value))}
                   />
                 </div>
