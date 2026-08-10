@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/dashboard/Header';
 import Sidebar from './components/dashboard/Sidebar';
 import HealthOverview from './components/dashboard/HealthOverview';
@@ -10,15 +11,28 @@ import OnboardingFlow from './components/onboarding/OnboardingFlow';
 import ProfileView from './components/profile/ProfileView';
 import SettingsView from './components/settings/SettingsView';
 import PrivacyPolicyView from './components/privacy/PrivacyPolicyView';
+import { APP_ROUTES, VIEW_TO_ROUTE, getViewFromPath } from './router/routes';
 import { loadAppState, resetAllData, saveAppState } from './utils/storage';
 import './App.css';
 
 export default function App() {
-  const [activeView, setActiveView] = useState('dashboard'); // dashboard | profile | settings | privacy
   const [activeTrackingTab, setActiveTrackingTab] = useState('exercise'); // exercise | food | sleep
   const [appState, setAppState] = useState(() => loadAppState());
   const [toastMessage, setToastMessage] = useState(null);
-  const [isRetakingOnboarding, setIsRetakingOnboarding] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activeView = getViewFromPath(location.pathname);
+
+  useEffect(() => {
+    if (!appState.onboardingCompleted && location.pathname !== APP_ROUTES.ONBOARDING) {
+      navigate(APP_ROUTES.ONBOARDING, { replace: true });
+      return;
+    }
+
+    if (appState.onboardingCompleted && location.pathname === APP_ROUTES.ONBOARDING) {
+      navigate(APP_ROUTES.DASHBOARD, { replace: true });
+    }
+  }, [appState.onboardingCompleted, location.pathname, navigate]);
 
   useEffect(() => {
     saveAppState(appState);
@@ -59,8 +73,13 @@ export default function App() {
         commitmentAgreed: ob.commitmentAgreed,
       },
     }));
-    setIsRetakingOnboarding(false);
+    navigate(APP_ROUTES.DASHBOARD, { replace: true });
     showToast('Welcome to FitHub! Your health metrics are ready.');
+  };
+
+  const handleSelectView = (view) => {
+    const route = VIEW_TO_ROUTE[view] || APP_ROUTES.DASHBOARD;
+    navigate(route);
   };
 
   const handleUpdateOnboardingData = (patch) => {
@@ -216,15 +235,13 @@ export default function App() {
   };
 
   // First Visit Check
-  if (!appState.onboardingCompleted || isRetakingOnboarding) {
+  if (!appState.onboardingCompleted) {
     return (
       <OnboardingFlow
         onboardingData={appState.onboarding || {}}
         onChangeData={handleUpdateOnboardingData}
         onToggleInterest={handleToggleOnboardingInterest}
         onCompleteOnboarding={handleCompleteOnboarding}
-        isModal={isRetakingOnboarding}
-        onCloseModal={isRetakingOnboarding ? () => setIsRetakingOnboarding(false) : undefined}
       />
     );
   }
@@ -240,14 +257,13 @@ export default function App() {
       )}
 
       {/* Left Navigation Sidebar */}
-      <Sidebar activeView={activeView} onSelectView={setActiveView} />
+      <Sidebar activeView={activeView} onSelectView={handleSelectView} />
 
       {/* Center Main Panel */}
       <main className="main-content-panel">
         <Header
           profile={appState.profile}
-          onSelectView={setActiveView}
-          onRetakeOnboarding={() => setIsRetakingOnboarding(true)}
+          onSelectView={handleSelectView}
         />
 
         {activeView === 'dashboard' && (
