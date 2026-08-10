@@ -224,25 +224,6 @@ body {
   gap: 12px;
 }
 
-.retake-onboarding-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: var(--radius-button);
-  border: 1px solid var(--color-secondary-3);
-  background-color: var(--color-bg-page);
-  color: var(--color-secondary-1);
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.retake-onboarding-btn:hover {
-  background-color: var(--color-secondary-3);
-}
-
 .profile-avatar-btn {
   width: 40px;
   height: 40px;
