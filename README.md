@@ -50,6 +50,7 @@ This repository follows a feature-branch collaboration model. Each contributor d
 | Branch | Purpose | Link |
 |---|---|---|
 | `main` | Stable, integrated release branch | [View](https://github.com/ashiqur-r-rahman/FitHub/tree/main) |
+|`shohag` | resolved issus and intregreated componets ,project creator[view](https://github.com/ashiqur-r-rahman/FitHub/tree/shohag)|
 | `rofaz` | Feature development — health metrics engine, onboarding, dashboard, tracking tabs, task manager, settings | [View](https://github.com/ashiqur-r-rahman/FitHub/tree/rofaz) |
 | `talha` | Feature development — additional contributor work | [View](https://github.com/ashiqur-r-rahman/FitHub/tree/talha) |
 
