@@ -1,6 +1,4 @@
-import { User, RefreshCw } from 'lucide-react';
-
-export default function Header({ profile, onSelectView, onRetakeOnboarding }) {
+export default function Header({ profile, onSelectView }) {
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return 'Good Morning';
@@ -25,15 +23,6 @@ export default function Header({ profile, onSelectView, onRetakeOnboarding }) {
       </div>
 
       <div className="topbar-right-actions">
-        <button
-          type="button"
-          className="retake-onboarding-btn"
-          title="Retake Onboarding Flow"
-          onClick={onRetakeOnboarding}
-        >
-          <RefreshCw size={14} /> Onboarding
-        </button>
-
         <button
           type="button"
           className="profile-avatar-btn"
